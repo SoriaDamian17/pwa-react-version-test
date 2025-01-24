@@ -6,7 +6,8 @@ function App() {
 
   return (
     <div id="app-desktop">
-        Pwa Test Version {pkVersion.version}.
+        <h2>Pwa Test Version {pkVersion.version}.</h2>
+        <h3>Update to new version</h3>
     </div>
   );
 }
