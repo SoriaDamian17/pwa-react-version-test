@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  background-color: '#F6F6F6';
+  font-family: 'Montserrat'!important;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.MuiDialog-paperScrollPaper {
+  width: 100%;
+}
+.MuiDialog-container {
+  padding: 1rem;
+}
+/* .MuiDialogContent-root {
+  max-height: 307px;
+} */
+.MuiAccordionSummary-contentGutters {
+  margin: 0!important;
+}
+.MuiPaper-elevation  {
+  border: 1px solid #cdcdcd;
+  margin: 0!important;
+}
+.MuiCollapse-entered {
+  margin: 0!important;
+}
+.MuiAccordionDetails-root {
+  padding: 0!important;
+}
+
+.swal2-popup {
+  width: 100%!important;
+}
+
+.MuiBadge-badge {
+  background: rgba(255,255,255,0.5)!important;
+  font-weight: 700!important;
+}
+
+.MuiButtonBase-root[disabled] {
+  color: #cdcdcd!important;
+}
