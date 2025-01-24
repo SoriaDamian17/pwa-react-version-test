@@ -16,17 +16,30 @@ root.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
 serviceWorkerRegistration.register({
-  onUpdate: (e) => {
-    const { waiting: { postMessage = null } = {} as any, update } = e || {};
-    if (postMessage) {
-      postMessage({ type: 'SKIP_WAITING' });
+  onUpdate: (registration) => {
+    const { waiting } = registration || {};
+
+    if (waiting) {
+      try {
+        // Solicitar al SW que tome control inmediatamente
+        waiting.postMessage({ type: 'SKIP_WAITING' });
+
+        // Escuchar cambios de estado
+        waiting.addEventListener('statechange', (event: any) => {
+          if (event.target.state === 'activated') {
+            console.log('New version activated. Reloading...');
+            window.location.reload();
+          }
+        });
+      } catch (error) {
+        console.error('Error updating Service Worker:', error);
+      }
+    } else {
+      console.log('No waiting Service Worker found.');
     }
-    update().then(() => {
-      console.log('Updated');
-      window.location.reload();
-    });
   },
 });
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
