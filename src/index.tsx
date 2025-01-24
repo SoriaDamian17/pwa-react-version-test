@@ -20,25 +20,28 @@ serviceWorkerRegistration.register({
     const { waiting } = registration || {};
 
     if (waiting) {
-      try {
-        // Solicitar al SW que tome control inmediatamente
+      // Mostrar un mensaje de actualización al usuario
+      const updateBanner = document.createElement('div');
+      updateBanner.innerHTML = `
+        <div style="position: fixed; bottom: 0; width: 100%; background:rgb(28, 134, 72); padding: 16px; text-align: center; z-index: 1000;">
+          A new version is available. <button id="update-now">Update Now</button>
+        </div>
+      `;
+      document.body.appendChild(updateBanner);
+
+      document.getElementById('update-now')?.addEventListener('click', () => {
         waiting.postMessage({ type: 'SKIP_WAITING' });
 
-        // Escuchar cambios de estado
         waiting.addEventListener('statechange', (event: any) => {
           if (event.target.state === 'activated') {
-            console.log('New version activated. Reloading...');
             window.location.reload();
           }
         });
-      } catch (error) {
-        console.error('Error updating Service Worker:', error);
-      }
-    } else {
-      console.log('No waiting Service Worker found.');
+      });
     }
   },
 });
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
