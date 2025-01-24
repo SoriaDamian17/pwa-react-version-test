@@ -6,7 +6,7 @@ const pkVersion = require('../package.json');
 
 function App() {
 
-  const [updateAvailable, setUpdateAvailable] = useState(true);
+  const [updateAvailable, setUpdateAvailable] = useState(false);
 
   useEffect(() => {
     // Registrar el Service Worker y manejar el evento onUpdate
